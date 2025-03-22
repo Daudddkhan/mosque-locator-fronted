@@ -3,6 +3,7 @@ import { Button } from 'primereact/button';
 import { Avatar } from 'primereact/avatar';
 import { Sidebar } from 'primereact/sidebar';
 
+
 export default function Navbar() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [profileDropdownVisible, setProfileDropdownVisible] = useState(false);
@@ -36,7 +37,7 @@ export default function Navbar() {
           <ul className="flex list-none p-0 m-0">
             <li className="px-3 py-2 cursor-pointer hover:text-primary transition-colors transition-duration-150">
               <span className="pi pi-home mr-2"></span>
-              <span>Home</span>
+             <a className='no-underline text-900 hover:text-secondry' href="/"><span>Home</span></a> 
             </li>
             <li className="px-3 py-2 cursor-pointer hover:text-primary transition-colors transition-duration-150">
               <span className="pi pi-book mr-2"></span>
@@ -55,14 +56,6 @@ export default function Navbar() {
         
         {/* Profile Section */}
         <div className="flex align-items-center">
-          {/* <Button 
-            type="button" 
-            className="p-button-rounded p-button-text" 
-            icon="pi pi-bell" 
-            badge="2" 
-            badgeClassName="p-badge-danger" 
-            aria-label="Notifications"
-          /> */}
           <div className="relative ml-2">
             <Avatar 
               image="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" 
@@ -85,22 +78,20 @@ export default function Navbar() {
                   style={{ zIndex: 1000 }}
                 >
                   <div className="py-1">
-                    <a className="flex align-items-center px-4 py-2 hover:surface-100 cursor-pointer">
+                    <a href='/Components/Profile' className="flex align-items-center px-4 py-2 hover:surface-100 cursor-pointer">
+                      
                       <i className="pi pi-user mr-2"></i>
-                      <span>Profile</span>
+                       <span >Profile </span>
                     </a>
-                    <a className="flex align-items-center px-4 py-2 hover:surface-100 cursor-pointer">
-                      <i className="pi pi-cog mr-2"></i>
-                      <span>Settings</span>
-                    </a>
+                  
                     <a className="flex align-items-center px-4 py-2 hover:surface-100 cursor-pointer">
                       <i className="pi pi-heart mr-2"></i>
                       <span>Favorites</span>
                     </a>
                     <div className="border-t border-gray-200"></div>
-                    <a className="flex align-items-center px-4 py-2 hover:surface-100 cursor-pointer">
+                    <a href='/Components/Auth/login' className="flex align-items-center px-4 py-2 hover:surface-100 cursor-pointer">
                       <i className="pi pi-sign-out mr-2"></i>
-                      <span>Sign Out</span>
+                      <span>Login</span>
                     </a>
                   </div>
                 </div>
@@ -111,8 +102,8 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Sidebar */}
-      <Sidebar visible={sidebarVisible} onHide={() => setSidebarVisible(false)} className="p-0 w-18rem">
-        <div className="px-4 py-3 surface-200">
+      <Sidebar visible={sidebarVisible} onHide={() => setSidebarVisible(false)} className="p-0 w-18rem text-red">
+        <div className="px-4 py-3 surface-200 bg-blue-200">
           <span className="text-xl font-bold text-primary">Mosque Locator</span>
         </div>
         <div className="p-3">

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { verifyOtp, resendOtp } from "@/app/fetchService";
+import { verifyOtp, resendOtp } from "@/app/FetchServices/auth-fetch-service";
 import { AxiosError } from "axios";
 import { Button } from "primereact/button";
 

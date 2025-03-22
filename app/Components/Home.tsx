@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { fetchMosques } from "@/app/fetchService";
-import MosqueCard from "./Mosque-card";
+import { Key, useEffect, useState } from "react";
+import { fetchMosques } from "@/app/FetchServices/auth-fetch-service";
+import MosqueCard from "./Mosques/Mosque-card";
 
 interface Mosque {
+  id: Key | null | undefined;
   name: string;
   description: string;
   contactNumber: string;
@@ -15,19 +16,30 @@ interface Mosque {
     maghrib: string;
     isha: string;
   };
+  key: number;
+  distance: number; 
+//   location: {
+//     coordinates: [];
+//     x?: number;
+//     y?: number;
+//     type?: string;
+//   };
 }
 
 export default function Home() {
   const [mosques, setMosques] = useState<Mosque[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [locationPermission, setLocationPermission] = useState<PermissionState | null>(null);
+  const [locationPermission, setLocationPermission] =
+    useState<PermissionState | null>(null);
 
   useEffect(() => {
     const checkPermission = async () => {
       if ("permissions" in navigator) {
         try {
-          const permissionStatus = await navigator.permissions.query({ name: "geolocation" as PermissionName });
+          const permissionStatus = await navigator.permissions.query({
+            name: "geolocation" as PermissionName,
+          });
           setLocationPermission(permissionStatus.state);
 
           if (permissionStatus.state === "granted") {
@@ -35,7 +47,9 @@ export default function Home() {
           } else if (permissionStatus.state === "prompt") {
             getUserLocation();
           } else {
-            setError("Location permission denied. Enable it from browser settings.");
+            setError(
+              "Location permission denied. Enable it from browser settings."
+            );
             setLoading(false);
           }
         } catch (err) {
@@ -87,10 +101,22 @@ export default function Home() {
         <p className="text-center text-red-500">{error}</p>
       ) : mosques.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-content-center">
-          {mosques.map((mosque, index) => (
-            <MosqueCard distance={0} location={{
-                //   coordinates: [Number,Number]
-              }} key={index} {...mosque} />
+          {mosques.map((mosque) => (
+            <MosqueCard
+                  key={mosque.id}
+                  name={mosque.name}
+                  description={mosque.description}
+                  contactNumber={mosque.contactNumber}
+                  distance={mosque.distance}
+                  //   location={mosque.location}
+                  prayerTimes={mosque.prayerTimes} // If available in your data
+                //   location={{
+                //       coordinates:[],
+                //       x: mosque.location.x,
+                //       y: mosque.location.y,
+                //       type: mosque.location.type
+                //   }}                  
+                />
           ))}
         </div>
       ) : (

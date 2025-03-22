@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { registerUser } from "@/app/fetchService";
+import { registerUser } from "@/app/FetchServices/auth-fetch-service";
 import { AxiosError } from "axios";
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';

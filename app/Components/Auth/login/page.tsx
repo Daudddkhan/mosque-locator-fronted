@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { loginUser } from "@/app/fetchService";
+import { loginUser } from "@/app/FetchServices/auth-fetch-service";
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
 
@@ -12,19 +12,23 @@ export default function Login() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    console.log(form)
   };
 
   const handleLogin = async () => {
     try {
       setLoading(true);
+      console.log("login",form.email,form.password)
       const response = await loginUser(form.email, form.password);
-      localStorage.setItem("token", response.data.token);
+        console.log(response);
+      localStorage.setItem("token", response.data.accessToken);
       setMessage("Login successful! Redirecting...");
-      setTimeout(() => router.push("/dashboard"), 2000);
+      setTimeout(() => router.push("/"), 2000);
     } catch (error) {
       setMessage( "Invalid credentials");
     } finally {
       setLoading(false);
+      
     }
   };
 

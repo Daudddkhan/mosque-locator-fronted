@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import 'primeflex/primeflex.scss';
+import Navbar from "./Components/Layout/Navbar";
+import ClientNavbarWrapper from "./Components/Layout/ClientNavbarWrapper";
  
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <ClientNavbarWrapper/>
         {children}
       </body>
     </html>
