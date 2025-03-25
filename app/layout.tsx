@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import 'primeflex/primeflex.scss';
-import Navbar from "./Components/Layout/Navbar";
+import "primeicons/primeicons.css";
 import ClientNavbarWrapper from "./Components/Layout/ClientNavbarWrapper";
  
 const geistSans = Geist({
