@@ -1191,7 +1191,7 @@ const handleUpdateRole = async () => {
         {/* Favorite Mosques */}
         <div className="col-12 md:col-8 lg:col-9">
           <Card title="Favorite Mosques" className="h-full">
-            {/* {favoriteMosques.length > 0 ? (
+            {favoriteMosques.length > 0 ? (
               <DataView 
                 value={favoriteMosques} 
                 layout="grid" 
@@ -1212,7 +1212,7 @@ const handleUpdateRole = async () => {
                 </p>
                 <Button label="Explore Mosques" icon="pi pi-search" className="mt-3" />
               </div>
-            )} */}
+            )}
 
             <MyMosque/>
           </Card>
