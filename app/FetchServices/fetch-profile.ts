@@ -47,6 +47,7 @@ export const removeMosque = async (id:any) => {
                 'Content-Type': 'application/json'
               }
         })
+        
         return response.data
  
     } catch (error){

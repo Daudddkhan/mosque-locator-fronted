@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import { Avatar } from 'primereact/avatar';
 import { Sidebar } from 'primereact/sidebar';
+import { logout } from '@/app/FetchServices/auth-fetch-service';
+import { Toast } from 'primereact/toast';
+import { useRouter } from "next/navigation"; // For Next.js 13+ with App Router
 
 
 export default function Navbar() {
@@ -16,6 +19,20 @@ export default function Navbar() {
   const closeProfileDropdown = () => {
     setProfileDropdownVisible(false);
   };
+
+  
+
+const router = useRouter();
+
+const handleLogout = async () => {
+  const response = await logout();
+  if (response?.success) {
+    router.push("/Components/Auth/login"); // Redirects to login page
+  } else {
+    alert("Failed to log out. Please try again.");
+  }
+};
+
 
   return (
     <>
@@ -88,11 +105,12 @@ export default function Navbar() {
                       <i className="pi pi-heart mr-2"></i>
                       <span>Favorites</span>
                     </a>
-                    <div className="border-t border-gray-200"></div>
-                    <a href='/Components/Auth/login' className="flex align-items-center px-4 py-2 hover:surface-100 cursor-pointer">
-                      <i className="pi pi-sign-out mr-2"></i>
-                      <span>Login</span>
-                    </a>
+                    <div className="flex align-items-center px-4 py-2 hover:surface-100 cursor-pointer">
+                
+                    <i className="pi pi-sign-out mr-2"></i>
+                      {!localStorage.getItem("token")?<a href="/Components/Auth/login"><span >login</span></a> : <span onClick={()=> handleLogout()}> Logout</span>}
+                    
+                    </div>
                   </div>
                 </div>
               </>

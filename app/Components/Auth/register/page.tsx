@@ -3,10 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/app/FetchServices/auth-fetch-service";
-import { AxiosError } from "axios";
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
-import { Value } from "sass";
         
                 
 
@@ -23,17 +21,23 @@ export default function Register() {
   const handleRegister = async () => {
     try {
       setLoading(true);
-      await registerUser(form.name, form.email, form.password);
-      setMessage("Registration successful! Check your email for OTP verification.");
-      setTimeout(() => router.push(`/Components/Auth/OtpVerify?email=${form.email}`), 2000);
-
-    } catch (error) {
-      const axiosError = error as AxiosError<{ message: string }>;
-      setMessage(axiosError.response?.data?.message || "Registration failed");
+      setMessage(""); // Clear previous messages
+  
+      const result = await registerUser(form.name, form.email, form.password);
+  
+      if (result.success) {
+        setMessage("Registration successful! Check your email for OTP verification.");
+        setTimeout(() => router.push(`/Components/Auth/OtpVerify?email=${form.email}`), 2000);
+      } else {
+        setMessage(result.error.error || "Registration failed. Please try again.");
+      }
+    } catch (error: any) {
+      setMessage("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="flex align-items-center justify-content-center min-h-screen bg-gray-100">

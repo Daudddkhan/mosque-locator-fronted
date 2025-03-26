@@ -12,22 +12,31 @@ export default function Login() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    console.log(form)
   };
 
   const handleLogin = async () => {
     try {
       setLoading(true);
-      console.log("login",form.email,form.password)
+      setMessage("")
+
       const response = await loginUser(form.email, form.password);
-        console.log(response);
-      localStorage.setItem("token", response.data.accessToken);
-      setMessage("Login successful! Redirecting...");
-      setTimeout(() => router.push("/"), 2000);
+        console.log(response)
+
+      if(response.success){
+        localStorage.setItem("token", response.data.accessToken);
+        setMessage("Login successful! Redirecting...");
+        setTimeout(() => router.push("/"), 2000);
+      } else {
+        setMessage(response.error.error || "Invalid credentials");
+        
+      }
+     
     } catch (error) {
       setMessage( "Invalid credentials");
+
     } finally {
       setLoading(false);
+      // setForm()
       
     }
   };
