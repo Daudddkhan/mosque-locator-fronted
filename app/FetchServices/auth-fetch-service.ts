@@ -79,12 +79,3 @@ export const resendOtp = async (email: string) => {
   return axios.post(`${API_BASE_URL}${AUTH_URI}/sendOtp`, { email });
 };
 
-export const fetchMosques = async (latitude: number, longitude: number) => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}${MOSQUE_URI}/nearest?latitude=${latitude}&longitude=${longitude}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching mosques:", error);
-    return [];
-  }
-};

@@ -12,8 +12,10 @@ import { Divider } from 'primereact/divider';
 import { Avatar } from 'primereact/avatar';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { DataView } from 'primereact/dataview';
-import { getFavMosque, getProfile, removeMosque, updateLocation, updateRole } from '@/app/FetchServices/fetch-profile';
+import { getProfile, updateLocation, updateRole } from '@/app/FetchServices/fetch-profile';
+import { getFavMosque, removeMosque } from '@/app/FetchServices/fetch-mosque-service';
 import MyMosque from '../Mosques/MyMosque';
+import GetMyMosque from '../Mosques/GetMyMosque';
 
 
 
@@ -383,7 +385,7 @@ const formatRoleLabel = (roles?: string): string => {
           <div className="flex flex-column h-full">
             <div className="relative">
               <img
-                src="/mosque-img.jpg" // Placeholder image
+                src="/mosque-img.jpg" 
                 alt={mosque.name}
                 className="w-full h-12rem object-cover border-round-top"
               />
@@ -591,8 +593,19 @@ const formatRoleLabel = (roles?: string): string => {
                 <Button label="Explore Mosques" icon="pi pi-search" className="mt-3" />
               </div>
             )}
-
-            <MyMosque/>
+            {
+              <GetMyMosque />
+            //   <div className="surface-card p-4 shadow-2 border-round">
+                
+            //   {mosqueExists ? (
+            //     
+                
+            //   ) : (
+            //     <MyMosque />
+            //   )}
+            // </div>
+            }
+            
           </Card>
         </div>
       </div>

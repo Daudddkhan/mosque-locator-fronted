@@ -1,7 +1,7 @@
 "use client";
 
 import { Key, useEffect, useState } from "react";
-import { fetchMosques } from "@/app/FetchServices/auth-fetch-service";
+import { fetchMosques } from "@/app/FetchServices/fetch-mosque-service";
 import MosqueCard from "./Mosques/Mosque-card";
 
 interface Mosque {
